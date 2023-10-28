@@ -1,29 +1,34 @@
 package com.fazuh.chartrainer;
 
-import java.util.Arrays;
+import java.util.Set;
 
 
 public class Chartrainer {
-    private static final String[] EXIT_COMMANDS = {"exit", "e"};
-    private static final String[] TRAINER_COMMANDS = {"matchChar", "matchNum", "mathChar"};
-
+    static final Set<String> EXIT_COMMANDS = Set.of("exit", "quit", "q");
+    static final Set<String> TRAINER_COMMANDS = Set.of("matchChar", "matchNum", "mathChar");
 
     public static void main(String[] args) {
         while (true) {
-            String userInput = Colour.askInput("Enter trainer mode: ");
+            String userInput;
+            int attempts;
 
-
-            if (Arrays.asList(EXIT_COMMANDS).contains(userInput)) {  // Exit
+            userInput = Colour.askInput("Enter trainer mode: ");
+            if (EXIT_COMMANDS.contains(userInput)) {  // Exit
                 Colour.printError("Exiting program...");
                 break;
-            } else if (!Arrays.asList(TRAINER_COMMANDS).contains(userInput)) {  // Invalid command
+            } else if (!TRAINER_COMMANDS.contains(userInput)) {  // Invalid command
                 Colour.printError(
                     "Invalid command. Available commands are " + String.join(", ", TRAINER_COMMANDS)
                 );
                 continue;
             }
 
-            int attempts = Integer.parseInt(Colour.askInput("Enter number of attempts: "));
+            try {
+                attempts = Integer.parseInt(Colour.askInput("Enter number of attempts: "));
+            } catch (Exception e) {
+                Colour.printError("Invalid input. " + e);
+                continue;
+            }
 
             switch (userInput) {
                 case "matchChar":
