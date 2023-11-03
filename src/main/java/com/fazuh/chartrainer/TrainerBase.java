@@ -2,22 +2,25 @@ package com.fazuh.chartrainer;
 
 import java.util.Random;
 
-public class TrainerBase {
+
+public abstract class TrainerBase {
     private int attempts;
     private int correctAnswers;
     private int currentCombo;
     private int highestCombo;
     private int incorrectAnswers;
     private final int totalAttempts;
-    public boolean isSession = true;
-    public Random rand = new Random();
+    boolean isSession = true;
+    Random rand = new Random();
 
 
     TrainerBase(int attempts) {
         this.attempts = this.totalAttempts = attempts;
     }
 
-    public void correctAnswer() {
+    abstract void run();
+
+    void correctAnswer() {
         this.correctAnswers++;
         this.currentCombo++;
 
@@ -30,7 +33,7 @@ public class TrainerBase {
         this.update();
     }
 
-    public void incorrectAnswer(String correctAnswer) {
+    void incorrectAnswer(String correctAnswer) {
         this.currentCombo = 0;
         this.incorrectAnswers++;
         Colour.printFail("The correct answer was " + correctAnswer);
@@ -58,11 +61,11 @@ public class TrainerBase {
         this.isSession = false;
     }
 
-    public char intToChar(int int_) {
+    char intToChar(int int_) {
         return (char) (int_ + 64);
     }
 
-    public int generateQuestion() {
+    int generateQuestion() {
         return this.rand.nextInt(26) + 1;
     }
 }

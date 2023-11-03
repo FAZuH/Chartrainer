@@ -1,5 +1,6 @@
 package com.fazuh.chartrainer;
 
+
 public class MathChar extends TrainerBase {
     MathChar(int attempts) {
         super(attempts);

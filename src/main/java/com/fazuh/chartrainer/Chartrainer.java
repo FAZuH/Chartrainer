@@ -1,22 +1,20 @@
 package com.fazuh.chartrainer;
 
-import java.util.Arrays;
+import java.util.Set;
 
 
 public class Chartrainer {
-    private static final String[] EXIT_COMMANDS = {"exit", "e"};
-    private static final String[] TRAINER_COMMANDS = {"matchChar", "matchNum", "mathChar"};
-
+    private static final Set<String> EXIT_COMMANDS = Set.of("exit", "quit", "e", "q");
+    private static final Set<String> TRAINER_COMMANDS = Set.of("matchChar", "matchNum", "mathChar");
 
     public static void main(String[] args) {
         while (true) {
             String userInput = Colour.askInput("Enter trainer mode: ");
 
-
-            if (Arrays.asList(EXIT_COMMANDS).contains(userInput)) {  // Exit
+            if (EXIT_COMMANDS.contains(userInput)) {  // Exit
                 Colour.printError("Exiting program...");
                 break;
-            } else if (!Arrays.asList(TRAINER_COMMANDS).contains(userInput)) {  // Invalid command
+            } else if (!TRAINER_COMMANDS.contains(userInput)) {  // Invalid command
                 Colour.printError(
                     "Invalid command. Available commands are " + String.join(", ", TRAINER_COMMANDS)
                 );

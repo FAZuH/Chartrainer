@@ -1,5 +1,6 @@
 package com.fazuh.chartrainer;
 
+
 public class MatchNum extends TrainerBase {
     MatchNum(int attempts) {
         super(attempts);
